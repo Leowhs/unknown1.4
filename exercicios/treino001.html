@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="shortcut icon" href="../media/gym.png" type="image/x-icon">
+<title>Treino (Academia)</title>
+<style>
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #1e1e1e;
+    color: #fff;
+    text-align: center;
+}
+
+header {
+    background: #2c2c2c;
+    padding: 1rem;
+    font-size: 2rem;
+    border-bottom: 1px solid #444;
+    color: #fff;
+}
+
+.container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    max-width: 600px;
+    gap: 1rem;
+    padding: 1rem;
+    margin: 0 auto;
+}
+
+.treino {
+    cursor: pointer;
+    background: #3a3a3a;
+    padding: 1rem;
+    border-radius: 10px;
+    transition: background 0.3s;
+    font-size: 1.1rem;
+    color: #f7f7f7;
+}
+
+.treino:hover {
+    background: #555;
+}
+
+#overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #1e1e1e;
+    color: #fff;
+    display: none;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 2rem;
+    box-sizing: border-box;
+    z-index: 1000;
+    overflow-y: auto;
+}
+
+#overlay h3 {
+    color: rgb(159, 79, 189);
+}
+
+#closeBtn {
+    position: absolute;
+    top: 20px;
+    right: 30px;
+    font-size: 2rem;
+    cursor: pointer;
+    background: none;
+    border: none;
+    color: rgb(159, 79, 189);
+    transition: transform 0.2s;
+}
+
+#closeBtn:hover {
+    transform: scale(1.2);
+}
+
+.contador {
+    display: block;
+    margin: 0.5rem auto;
+    padding: 0.5rem 1rem;
+    background: rgb(159, 79, 189);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background 0.3s, transform 0.2s;
+    width: 70%;
+}
+
+.contador:hover {
+    background: rgba(159, 79, 189, 0.85);
+    transform: scale(1.05);
+}
+
+hr {
+    width: 80%;
+    border: 1px solid rgb(159, 79, 189);
+    margin: 1rem auto;
+}
+
+a {
+    color: rgb(159, 79, 189);
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+.ex {
+    margin-bottom: 2px;
+    font-size: 17px;
+    line-height: 25px;
+}
+
+.ex strong {
+    font-size: 17px;
+    margin-bottom: 2px;
+    color: rgb(159, 79, 189);
+}
+</style>
+</head>
+<body>
+
+<header>Olá, Leonardo!</header>
+<p>Escolha seu treino: <a href="exercicios.html">índice</a> > <a href="exercicios.html">exercícios</a> > <a href="treino001.html">treino001</a></p>
+
+<div class="container">
+<div class="treino" onclick="mostrar('A')">A = Peito <br> (Sexta-Feira)</div>
+<div class="treino" onclick="mostrar('B')">B = Pernas 1 <br> (Quarta-feira)</div>
+<div class="treino" onclick="mostrar('C')">C = Costas <br> (Segunda-feira)</div>
+<div class="treino" onclick="mostrar('D')">D = Braços <br> (Terça-feira)</div>
+<div class="treino" onclick="mostrar('E')">E = Pernas 2 <br> (Terça-feira)</div>
+</div>
+
+<div id="overlay">
+<button id="closeBtn" onclick="fechar()">×</button>
+<div id="detalhes"></div>
+</div>
+
+<script>
+function mostrar(tipo){
+const overlay=document.getElementById('overlay');
+const detalhes=document.getElementById('detalhes');
+
+function ex(nome,series,reps,carga,int){
+return `
+<div class="ex">
+<strong>${nome}</strong><br>
+Séries: ${series} &nbsp;&nbsp; Reps: ${reps}<br>
+Carga: ${carga}<br>
+Intervalo: ${int}<br>
+<button class="contador" onclick="contar(this, ${series})">Séries concluídas: 0/${series}</button>
+<hr>
+</div>
+`;
+}
+
+let t=`<h3>Treino ${tipo}</h3><hr>`;
+
+if(tipo==='A'){
+t+=ex("Supino em Pé","4","12/10/8/6","5kg/7.5kg","1min");
+t+=ex("Supino Inclinado Máquina","4","8","7.5kg/10kg","1min");
+t+=ex("Supino Inclinado Guiado","4","8 a 12","7.5kg/10kg","1min");
+t+=ex("Fly","4","8 a 12","7.5kg/10kg","1min");
+t+=ex("Tríceps Pulley W","4","8","7.5kg/10kg","1min");
+t+=ex("Tríceps Francês Corda","4","8 a 12","10kg PR","1min");
+t+=ex("Prancha Isométrica","3","-","-","1min");
+} 
+
+if(tipo==='B'){
+t+=ex("Hack","4","10","20kg PR","1min");
+t+=ex("Leg Press Horizontal + Panturrilha","4","10","-","1min");
+t+=ex("Mesa Flexora","4","15/12/10/8","Leve/Normal/Médio/Pesado","1min");
+t+=ex("Elevação Pélvica","4","10","?","1min");
+t+=ex("Cadeira Extensora","4","10","-","1min");
+t+=ex("Abdominal Infra Paralela","5","MÁX","-","1min");
+}
+
+if(tipo==='C'){
+t+=ex("Remada Articulada Fechada","5","12/10/8/8/6","15/20/25kg","1min");
+t+=ex("Remada Baixa Triângulo","4","10","39kg PR","1min");
+t+=ex("Puxada Articulada","4","10","40kg","1min");
+t+=ex("Puxada Alta Triângulo","4","10","35kg PR","1min");
+t+=ex("Lombar Banco","4","12 a 15","","1min");
+}
+
+if(tipo==='D'){
+t+=ex("Desenvolvimento Articulado","4","8 a 10","7.5kg/10kg","1min");
+t+=ex("Remada Alta","4","8 a 10","12kg","1min");
+t+=ex("Encolimento","4","12 a 15","12kg","1min");
+t+=ex("Fly Inverso","4","8 a 12","5kg/10kg","1min");
+t+=ex("Elevação Lateral","4","8 a 12","12kg","1min");
+t+=ex("Prancha Isométrica","4","-","-","45seg");
+t+=ex("Abdominal Supra Solo","4","10 a 15","-","45seg");
+t+=ex("Abdominal Infra Paralela","4","MÁX","-","45seg");
+}
+
+if(tipo==='E'){
+t+=ex("Leg Press 45","4","10","25kg PR","1min");
+t+=ex("Cadeira Abdutora","3","15","?","1min");
+t+=ex("Cadeira Adutora","3","15","?","1min");
+t+=ex("Panturrilha Banco","3","10 a 15","30kg PR","1min");
+t+=ex("Rosca Direta na Polia","4","8 a 10","12kg PR","1min");
+t+=ex("Rosca Martelo com Halteres","4","8 a 10","8kg PR","1min");
+t+=ex("Rosca Scott","4","8 a 10","16kg PR","1min");
+}
+
+detalhes.innerHTML=t;
+overlay.style.display='flex';
+
+clearTimeout(window.fechamento);
+window.fechamento=setTimeout(fechar,7200000);
+}
+
+function contar(btn,total){
+let n=parseInt(btn.dataset.n)||0;
+n++;
+if(n>total)n=0;
+btn.dataset.n=n;
+btn.textContent=`Séries concluídas: ${n}/${total}`;
+}
+
+function fechar(){
+document.getElementById('overlay').style.display='none';
+}
+</script>
+
+</body>
+</html>

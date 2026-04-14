@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="../style.css">
+<title>Treino (Casa)</title>
+<style>
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #1e1e1e;
+    color: #fff;
+    text-align: center;
+}
+
+header {
+    background: #2c2c2c;
+    padding: 1rem;
+    font-size: 2rem;
+    border-bottom: 1px solid #444;
+    color: #fff;
+}
+
+.container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    max-width: 600px;
+    gap: 1rem;
+    padding: 1rem;
+    margin: 0 auto;
+}
+
+.treino {
+    cursor: pointer;
+    background: #3a3a3a;
+    padding: 1rem;
+    border-radius: 10px;
+    transition: background 0.3s;
+    font-size: 1.1rem;
+    color: #f7f7f7;
+}
+
+.treino:hover {
+    background: #555;
+}
+
+#overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #1e1e1e;
+    color: #fff;
+    display: none;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 2rem;
+    box-sizing: border-box;
+    z-index: 1000;
+    overflow-y: auto;
+}
+
+#overlay h3 {
+    color: rgb(159, 79, 189);
+}
+
+#closeBtn {
+    position: absolute;
+    top: 20px;
+    right: 30px;
+    font-size: 2rem;
+    cursor: pointer;
+    background: none;
+    border: none;
+    color: rgb(159, 79, 189);
+    transition: transform 0.2s;
+}
+
+#closeBtn:hover {
+    transform: scale(1.2);
+}
+
+.contador {
+    display: block;
+    margin: 0.5rem auto;
+    padding: 0.5rem 1rem;
+    background: rgb(159, 79, 189);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background 0.3s, transform 0.2s;
+    width: 70%;
+}
+
+.contador:hover {
+    background: rgba(159, 79, 189, 0.85);
+    transform: scale(1.05);
+}
+
+hr {
+    width: 80%;
+    border: 1px solid rgb(159, 79, 189);
+    margin: 1rem auto;
+}
+
+a {
+    color: rgb(159, 79, 189);
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+@keyframes fade {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.ex {
+    margin-bottom: 2px;
+    font-size: 17px;
+    line-height: 25px;
+}
+
+.ex strong {
+    font-size: 17px;
+    margin-bottom: 2px;
+    color: rgb(159, 79, 189);
+}
+</style>
+</head>
+<body>
+
+<header>Olá, Leonardo!</header>
+<p>Escolha seu treino: <a href="exercicios.html">índice</a> > <a href="exercicios.html">exercícios</a> > <a href="treino001.html">treino001</a></p>
+
+<div class="container">
+<div class="treino" onclick="mostrar('A')">A = Superiores</div>
+<div class="treino" onclick="mostrar('B')">B = Inferiores</div>
+<div class="treino" onclick="mostrar('C')">C = Abdomen</div>
+</div>
+
+<div id="overlay">
+<button id="closeBtn" onclick="fechar()">×</button>
+<div id="detalhes"></div>
+</div>
+
+<script>
+function mostrar(tipo){
+const overlay=document.getElementById('overlay');
+const detalhes=document.getElementById('detalhes');
+
+function ex(nome,series,reps,int){
+return `
+<div class="ex">
+<strong>${nome}</strong><br>
+Séries: ${series} &nbsp;&nbsp; Reps: ${reps}<br>
+Intervalo: ${int}<br>
+<button class="contador" onclick="contar(this, ${series})">Séries concluídas: 0/${series}</button>
+<hr>
+</div>
+`;
+}
+
+let t=`<h3>Treino ${tipo}</h3><hr>`;
+
+if(tipo==='A'){
+t+=ex("Supino Inclinado",4,"10","1min");
+t+=ex("Supino Declinado",4,"8/8/6/6 *PR*","1min");
+t+=ex("Supino Reto Halter",4,"8 a 10","1min");
+t+=ex("Supino Vertical em pé",4,"8","1min");
+t+=ex("Tríceps Pulley",4,"8","1min");
+t+=ex("Tríceps Francês Corda",4,"8","1min");
+t+=ex("Prancha Isométrica",4,"Máximo","1min");
+t+=ex("Abdominal Reto Solo + Infra Solo",4,"Máximo","1min");
+}
+
+if(tipo==='B'){
+t+=ex("Elevação Pélvica",4,"12","1min");
+t+=ex("Coice",4,"8","1min");
+t+=ex("Agachamento",4,"10","1min");
+t+=ex("Agachamento Búlgaro",4,"8","1min");
+t+=ex("Abdução deitado",3,"15","1min");
+t+=ex("Afundo",4,"8","1min");
+}
+
+if(tipo==='C'){
+t+=ex("Elevação Pélvica",4,"12","1min");
+t+=ex("Coice",4,"8","1min");
+t+=ex("Agachamento",4,"10","1min");
+t+=ex("Agachamento Búlgaro",4,"8","1min");
+t+=ex("Abdução em pé",4,"15","1min");
+}
+
+detalhes.innerHTML=t;
+overlay.style.display='flex';
+
+clearTimeout(window.fechamento);
+window.fechamento=setTimeout(fechar,7200000);
+}
+
+function contar(btn,total){
+let n=parseInt(btn.dataset.n)||0;
+n++;
+if(n>total)n=0;
+btn.dataset.n=n;
+btn.textContent=`Séries concluídas: ${n}/${total}`;
+}
+
+function fechar(){document.getElementById('overlay').style.display='none';}
+</script>
+
+</body>
+</html>
