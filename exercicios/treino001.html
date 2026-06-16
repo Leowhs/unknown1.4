@@ -132,7 +132,7 @@ a:hover {
 </head>
 <body>
 
-<header>Olá, Leonardo!</header>
+<header>Olá, <strong>Leonardo</strong>!</header>
 <p>Escolha seu treino: <a href="exercicios.html">índice</a> > <a href="exercicios.html">exercícios</a> > <a href="treino001.html">treino001</a></p>
 
 <div class="container">
@@ -169,22 +169,20 @@ Intervalo: ${int}<br>
 let t=`<h3>Treino ${tipo}</h3><hr>`;
 
 if(tipo==='A'){
-t+=ex("Supino em Pé","4","12/10/8/6","5kg/7.5kg","1min");
-t+=ex("Supino Inclinado Máquina","4","8","7.5kg/10kg","1min");
-t+=ex("Supino Inclinado Guiado","4","8 a 12","7.5kg/10kg","1min");
-t+=ex("Fly","4","8 a 12","7.5kg/10kg","1min");
-t+=ex("Tríceps Pulley W","4","8","7.5kg/10kg","1min");
-t+=ex("Tríceps Francês Corda","4","8 a 12","10kg PR","1min");
-t+=ex("Prancha Isométrica","3","-","-","1min");
+t+=ex("Supino reto guiado","4","12/10/8/8","7.5kg","1min");
+t+=ex("Supino inclinado máquina","4","8 a 10","10kg","1min");
+t+=ex("Supino vertical máquina","4","8 a 12","?","1min");
+t+=ex("Tríceps Pulley Corda","3 a 4","8 a 10","12kg","1min");
+t+=ex("Tríceps Francês Corda","4","8 a 10","?","1min");
 } 
 
 if(tipo==='B'){
-t+=ex("Hack","4","10","20kg PR","1min");
-t+=ex("Leg Press Horizontal + Panturrilha","4","10","-","1min");
-t+=ex("Mesa Flexora","4","15/12/10/8","Leve/Normal/Médio/Pesado","1min");
-t+=ex("Elevação Pélvica","4","10","?","1min");
-t+=ex("Cadeira Extensora","4","10","-","1min");
-t+=ex("Abdominal Infra Paralela","5","MÁX","-","1min");
+t+=ex("Cadeira abdutora","4","10","","1min");
+t+=ex("Cadeira adutora","4","10","","1min");
+t+=ex("Panturrilha em pé","4","10","","1min");
+t+=ex("Leg Press Unilateral","4","10","","1min");
+t+=ex("Cadeira Extensora","4","10","","1min");
+t+=ex("Mesa Flexora","4","10","","1min");
 }
 
 if(tipo==='C'){
@@ -196,14 +194,12 @@ t+=ex("Lombar Banco","4","12 a 15","","1min");
 }
 
 if(tipo==='D'){
-t+=ex("Desenvolvimento Articulado","4","8 a 10","7.5kg/10kg","1min");
+t+=ex("Desenvolvimento Articulado","4","8 a 10","10kg","1min");
 t+=ex("Remada Alta","4","8 a 10","12kg","1min");
-t+=ex("Encolimento","4","12 a 15","12kg","1min");
-t+=ex("Fly Inverso","4","8 a 12","5kg/10kg","1min");
-t+=ex("Elevação Lateral","4","8 a 12","12kg","1min");
-t+=ex("Prancha Isométrica","4","-","-","45seg");
-t+=ex("Abdominal Supra Solo","4","10 a 15","-","45seg");
-t+=ex("Abdominal Infra Paralela","4","MÁX","-","45seg");
+t+=ex("Elevação lateral","4","8 a 10","12kg","1min");
+t+=ex("Elevação frontal","4","8 a 10","10kg","1min");
+t+=ex("Rosca Martelo Corda","4","8 a 10","10kg","1min");
+t+=ex("Rosca Scott","4","8 a 10","16kg","1min");
 }
 
 if(tipo==='E'){
